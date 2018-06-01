@@ -21,7 +21,7 @@ class Shared {
 			// If channel key present and invalid
 			return false;
 		} else {
-			// If no channel key
+			// If no channel key (for testing purposes)
 			return true;
 		}
 	}
