@@ -1,9 +1,9 @@
 # discord-free-game-alert
 
 # Required files:  
-games.txt (empty file, inside of triggers folder)  
-log.txt (empty file, inside of actions folder)  
-key.txt (get service key from https://platform.ifttt.com/services/<YOUR_SERVICE_NAME>/api, place in root directory)  
+* games.txt (empty file, inside of triggers folder)  
+* log.txt (empty file, inside of actions folder)  
+* key.txt (get service key from https://platform.ifttt.com/services/<YOUR_SERVICE_NAME>/api, place in root directory)  
 
 # Basic Instructions:  
 1. Create a new applet.  
