@@ -23,6 +23,12 @@ if ($shared->channelKeyIsValid()) {
 		$game_link = $request_body->actionFields->game_link;
 		$webhook_link = $request_body->actionFields->webhook_link;
 
+		// Check to make sure webhook is valid 
+		if (strpos($webhook_link, "https://discordapp.com/") != 0) {
+			$shared->errorMessage(400, "Invalid webhook_link", Shared::SKIP);
+			exit();
+		}
+
 		// Message to send
 		$content = "__**FREE GAME ALERT**__\n\n**$game_title**\n\n$game_link";
 
