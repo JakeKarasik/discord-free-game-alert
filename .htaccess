@@ -1,0 +1,12 @@
+RewriteEngine on 
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+Options -Indexes
+
+Header set Cache-Control "max-age=0, private, no-cache, no-store, must-revalidate"
+
+<FilesMatch .txt>
+    Deny from all
+</FilesMatch>
