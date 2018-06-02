@@ -19,7 +19,10 @@ class Game {
 	public $created_at;
 	public $meta;
 
-	public function __construct() {
+	public function __construct($title=null, $link=null) {
+		$this->game_title = $title;
+		$this->game_link = $link;
+
 		// Set created data
 		$datetime = new DateTime();
 		$this->created_at = $datetime->format(DateTime::ATOM);
@@ -58,7 +61,8 @@ if ($shared->channelKeyIsValid()) {
 
 	$entries = $xpath->query('//div[contains(@class, "thing")]');
 
-	$keywords = ["100%", "free"];
+	$keywords = ["100% off", "free"];
+	$excludes = ["free gift", "free shipping", "free us shipping"];
 
 	$new_games = [];
 
@@ -69,17 +73,23 @@ if ($shared->channelKeyIsValid()) {
 		$content = strtolower($entry->textContent);
 
 		// Clean up game title
-		$start_strip_pos = strpos($content, "submitted");
-		$title = substr($content, 0, $start_strip_pos);
+		$submitted_text_pos = strpos($content, "submitted");
+		$title = substr($content, 0, $submitted_text_pos);
+		$true_title_pos = strpos($title, "[");
+		$title = substr($content, $true_title_pos);
 
-		// Save games with title that contains "free" keyword(s)
+		// Save games with title that contains any keyword(s) and exclude false positives
 		foreach ($keywords as $kw) {
 			if (strpos($content, $kw) !== false) {
+				// Make sure isn't false positive
+				foreach ($exludes as $ex) {
+					if (strpos($content, $ex) !== false) {
+						// False positive
+						break 2;
+					}
+				}
 
-				$new_game = new Game();
-
-				$new_game->game_title = $title;
-				$new_game->game_link = $link;
+				$new_game = new Game($title, $link);
 
 	   			array_push($new_games, $new_game);
 	   			break;
