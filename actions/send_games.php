@@ -12,22 +12,18 @@ if ($shared->channelKeyIsValid()) {
 
 	if ($action_fields == false) {
 		$shared->errorMessage(400, "Missing action fields");
-	} else if (!isset($request_body->actionFields->channel_id)) {
+	} else if (!isset($action_fields->channel_id)) {
 		$shared->errorMessage(400, "Missing action field channel_id");
-	} else if (empty($request_body->actionFields->channel_id)) {
+	} else if (empty($action_fields->channel_id)) {
 		$shared->errorMessage(400, "channel_id cannot be empty", Shared::SKIP);
+	} else if (strpos($action_fields->webhook_link, "https://discordapp.com/") != 0) {
+		$shared->errorMessage(400, "Invalid webhook_link", Shared::SKIP);
 	} else {
 
-		$channel_id = $request_body->actionFields->channel_id;
-		$game_title = $request_body->actionFields->game_title;
-		$game_link = $request_body->actionFields->game_link;
-		$webhook_link = $request_body->actionFields->webhook_link;
-
-		// Check to make sure webhook is valid 
-		if (strpos($webhook_link, "https://discordapp.com/") != 0) {
-			$shared->errorMessage(400, "Invalid webhook_link", Shared::SKIP);
-			exit();
-		}
+		$channel_id = $action_fields->channel_id;
+		$game_title = $action_fields->game_title;
+		$game_link = $action_fields->game_link;
+		$webhook_link = $action_fields->webhook_link;
 
 		// Message to send
 		$content = "__**FREE GAME ALERT**__\n\n**$game_title**\n\n$game_link";
