@@ -74,7 +74,7 @@ if (Shared::channelKeyIsValid()) {
 		$submitted_text_pos = strpos($content, "submitted");
 		$title = substr($content, 0, $submitted_text_pos);
 		$true_title_pos = strpos($title, "[");
-		$title = substr($content, $true_title_pos);
+		$title = substr($title, $true_title_pos);
 
 		// Save games with title that contains any keyword(s) and exclude false positives
 		foreach ($keywords as $kw) {
