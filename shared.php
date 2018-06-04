@@ -10,7 +10,7 @@ class Shared {
 		self::$MY_KEY = file_get_contents($_SERVER['DOCUMENT_ROOT']."/ifttt/v1/key.txt");
 	}
 
-	public function channelKeyIsValid() {
+	public static function channelKeyIsValid() {
 
 		$channel_key = array_key_exists('HTTP_IFTTT_CHANNEL_KEY', $_SERVER) ? $_SERVER['HTTP_IFTTT_CHANNEL_KEY'] : null;
 
@@ -26,7 +26,7 @@ class Shared {
 		}
 	}
 
-	public function errorMessage($code, $msg, $skip=false) {
+	public static function errorMessage($code, $msg, $skip=false) {
 		http_response_code($code);
 		header('Content-Type: application/json; charset=utf-8');
 		if ($skip) {
@@ -36,9 +36,9 @@ class Shared {
 		}
 	}
 
-	public function successMessage($msg) {
+	public static function successMessage($msg) {
 		header('Content-Type: application/json; charset=utf-8');
-		print($msg);
+		print(json_encode($msg));
 	}
 
 }

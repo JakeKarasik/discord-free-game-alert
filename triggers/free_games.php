@@ -1,8 +1,6 @@
 <?php
 require_once("../shared.php");
 
-$shared = new Shared();
-
 class Meta {
 	public $id;
 	public $timestamp;
@@ -45,7 +43,7 @@ function gameAlreadyExists($games, $link) {
 	return false;
 }
 
-if ($shared->channelKeyIsValid()) {
+if (Shared::channelKeyIsValid()) {
 	// Get JSON body from POST request
 	$request_body = json_decode(file_get_contents('php://input'));
 
@@ -121,9 +119,9 @@ if ($shared->channelKeyIsValid()) {
 	$max = $limit > count($saved_games) ? count($saved_games) : $limit;
 	$data = $limit > 0 ? array_slice($saved_games, 0, $max) : [];
 
-	$shared->successMessage(json_encode(["data" => $data]));
+	Shared::successMessage(["data" => $data]);
 } else {
-	$shared->errorMessage(401, "Invalid channel key");
+	Shared::errorMessage(401, "Invalid channel key");
 }
 
 
