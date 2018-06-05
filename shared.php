@@ -2,19 +2,14 @@
 
 class Shared {
 
-	static private $MY_KEY = null;
 	const SKIP = true;
 
-	public function __construct() {
-		// Load in ifttt service key from txt file
-		self::$MY_KEY = file_get_contents($_SERVER['DOCUMENT_ROOT']."/ifttt/v1/key.txt");
-	}
-
 	public static function channelKeyIsValid() {
-
+		$my_key = file_get_contents($_SERVER['DOCUMENT_ROOT']."/ifttt/v1/key.txt");
+		
 		$channel_key = array_key_exists('HTTP_IFTTT_CHANNEL_KEY', $_SERVER) ? $_SERVER['HTTP_IFTTT_CHANNEL_KEY'] : null;
 
-		if ($channel_key != null && strcmp($channel_key, self::$MY_KEY) == 0) {
+		if ($channel_key != null && strcmp($channel_key, $my_key) == 0) {
 			// If channel key present and valid
 			return true;
 		} else if ($channel_key != null) {

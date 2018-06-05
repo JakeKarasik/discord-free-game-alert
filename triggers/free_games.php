@@ -59,7 +59,7 @@ if (Shared::channelKeyIsValid()) {
 
 	$entries = $xpath->query('//div[contains(@class, "thing")]');
 
-	$keywords = ["100% off", "free"];
+	$keywords = ["100% off", "free ", "free)", "free]"];
 	$excludes = ["free gift", "free shipping", "free us shipping"];
 
 	$new_games = [];
@@ -80,7 +80,7 @@ if (Shared::channelKeyIsValid()) {
 		foreach ($keywords as $kw) {
 			if (strpos($content, $kw) !== false) {
 				// Make sure isn't false positive
-				foreach ($exludes as $ex) {
+				foreach ($excludes as $ex) {
 					if (strpos($content, $ex) !== false) {
 						// False positive
 						break 2;
