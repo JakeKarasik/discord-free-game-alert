@@ -41,7 +41,7 @@ if (Shared::channelKeyIsValid()) {
 
 		// Log when games are sent
 		$uniqid = uniqid();
-		$msg = "Channel: $channel_id alerted of free game, $game_link.";
+		$msg = "trigger=free_games, channel_id=$channel_id, game_link=$game_link";
 		file_put_contents("log.txt", "[".date('m/d/Y h:i:s a') . "] - [$uniqid] - $msg\n", FILE_APPEND);
 
 		$response = ["data" => [["id" => $uniqid]]];
