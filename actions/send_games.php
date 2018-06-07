@@ -23,6 +23,11 @@ if (Shared::channelKeyIsValid()) {
 		$game_link = $action_fields->game_link;
 		$webhook_link = $action_fields->webhook_link;
 
+		// Check if reddit link
+		if (strpos($game_link, "/r/GameDeals") == 0) {
+			$game_link = "https://www.reddit.com" . $game_link;
+		}
+
 		// Message to send
 		$content = "__**FREE GAME ALERT**__\n\n**$game_title**\n\n$game_link";
 
@@ -36,7 +41,7 @@ if (Shared::channelKeyIsValid()) {
 		# Return response instead of printing.
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		# Send request.
-		$result = curl_exec($ch);
+		curl_exec($ch);
 		curl_close($ch);
 
 		// Log when games are sent
