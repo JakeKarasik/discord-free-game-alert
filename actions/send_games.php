@@ -24,7 +24,7 @@ if (Shared::channelKeyIsValid()) {
 		$webhook_link = $action_fields->webhook_link;
 
 		// Check if reddit link
-		if (strpos($game_link, "/r/GameDeals") == 0) {
+		if (strpos($game_link, "/r/GameDeals") === 0) {
 			$game_link = "https://www.reddit.com" . $game_link;
 		}
 
