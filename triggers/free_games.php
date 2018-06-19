@@ -87,6 +87,11 @@ if (Shared::channelKeyIsValid()) {
 					}
 				}
 
+				// Check if reddit link
+				if (strpos($link, "/r/GameDeals") === 0) {
+					$link = "https://www.reddit.com" . $link;
+				}
+
 				$new_game = new Game($title, $link);
 
 	   			array_push($new_games, $new_game);
