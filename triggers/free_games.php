@@ -121,8 +121,9 @@ if (Shared::channelKeyIsValid()) {
 	}
 
 	// Return limited number of results
-	$max = $limit > count($saved_games) ? count($saved_games) : $limit;
-	$data = $limit > 0 ? array_slice($saved_games, 0, $max) : [];
+	$num_games_saved = count($saved_games);
+	$max = $limit > $num_games_saved ? $num_games_saved : $limit;
+	$data = $limit > 0 ? array_slice($saved_games, $max * -1) : [];
 
 	Shared::successMessage(["data" => $data]);
 } else {
