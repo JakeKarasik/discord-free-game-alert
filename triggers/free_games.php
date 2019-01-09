@@ -92,6 +92,10 @@ if (Shared::channelKeyIsValid()) {
 					$link = "https://www.reddit.com" . $link;
 				}
 
+				if (!$title) {
+					break;
+				}
+
 				$new_game = new Game($title, $link);
 
 	   			array_push($new_games, $new_game);
