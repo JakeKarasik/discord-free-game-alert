@@ -60,7 +60,14 @@ if (Shared::channelKeyIsValid()) {
 	$entries = $xpath->query('//div[contains(@class, "thing")]');
 
 	$keywords = ["100% off", "free ", "free)", "free]"];
-	$excludes = ["free gift", "free shipping", "free us shipping"];
+	$excludes = [
+		"free gift", 
+		"free shipping",
+		"free us shipping",
+		"free ship", 
+		"months free",
+		"free weekend"
+	];
 
 	$new_games = [];
 
